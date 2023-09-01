@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CS50 Web Lab 0</title>
+        <link rel = "stylesheet" href ="formatting.css">
+    </head>
+    <body>
+        <div id = main-container>
+            <div id="link-container">
+                <a href = "index.html" class="search-links">Google Search</a> 
+            </div>
+            <div id = "image-container">
+                <img id = "logo" src ="logo/Not_Google_Images_logo.png" alt = "logo">
+            </div>   
+
+            <div id = "search-container">
+                <form action="https://google.com/search">
+                    <div id ="searchbar" >
+                        <div id = "search-input">
+                            <button type = "submit" class = "lookinglass-btn">
+                                <svg id = "lookinglass" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-iml="1692829813095"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+                            </button>
+                            <input id = "search" type="text" name="q" autocomplete="off">
+                            <input type = "hidden" name = "tbm" value = "isch">
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+    </body>
+</html>

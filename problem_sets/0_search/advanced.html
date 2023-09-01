@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CS50 Web Lab 0</title>
+        <link rel = "stylesheet" href ="formatting.css">
+    </head>
+    <body>
+        <div id = main-container>
+
+            <div id="adv-link-container">
+                <a href = "index.html" class="search-links">Google Search</a> 
+                <div id="logo-container">
+                    <a href="index.html" >
+                        <img id = "adv-logo" src ="logo/Not_Google_logo.png" alt = "adv-logo">
+                    </a>
+                </div>
+                
+            </div>
+
+            <div id="heading-container">
+                <label id = "header">Advanced Search</label>
+            </div>
+            <div class = "line-div"></div>
+
+            <div id = "adv-container">
+                <form action="https://google.com/search">
+                <div id="adv-search-container">
+                    <div id = "header-div">
+                        <div id = "add-text"> 
+                            <label >Find pages with...</label>
+                        </div>
+                        <div class = "adv-search-input">
+                        </div>
+                        <div class = "supp-text" id = "supp-text">
+                            <label>To do this in the search box</label>
+                        </div>
+                    </div>
+                    <div class = "adv-search-options">
+                        <div class = "adv-search-opt">
+                            <label class = "search-opt">all these words:</label>
+                        </div>
+                        <div class = "adv-search-input">
+                            <input class="adv-search-box" value autofocus = "autofocus" type = "text" name="as_q">
+                        </div>
+                        <div class = "adv-search-ex">
+                            <label class = "search-opt">Type the important words: <span class = "tinyfont">tri-colour terrier</span></label>
+                        </div>
+                    </div>
+                    
+                    <div class = "adv-search-options">
+                        <div class = "adv-search-opt">
+                            <label class = "search-opt">this exact word or phrase:</label>
+                        </div>
+                        <div class = "adv-search-input">
+                            <input class="adv-search-box" value autofocus = "autofocus" type = "text" name="as_epq">
+                        </div>
+                        <div class = "adv-search-ex">
+                            <label class = "search-opt">Put exact words in quotes: <span class = "tinyfont">"rat terrier"</span></label>
+                        </div>
+                    </div>
+
+                    <div class = "adv-search-options">
+                        <div class = "adv-search-opt">
+                            <label class = "search-opt">any of these words:</label>
+                        </div>
+                        <div class = "adv-search-input">
+                            <input class="adv-search-box" value autofocus = "autofocus" type = "text" name="as_oq">
+                        </div>
+                        <div class = "adv-search-ex">
+                            <label class = "search-opt">Type <span class = "tinyfont">OR</span> between all the words you want: <span class = "tinyfont">miniature OR standard</span></label>
+                        </div>
+                    </div>
+
+                    <div class = "adv-search-options">
+                        <div class = "adv-search-opt">
+                            <label class = "search-opt">none of these words:</label>
+                        </div>
+                        <div class = "adv-search-input">
+                            <input class="adv-search-box" value autofocus = "autofocus" type = "text" name="as_eq">
+                        </div>
+                        <div class = "adv-search-ex">
+                            <label class = "search-opt">Put a minus sign just before the words that you don't want: <span class = "tinyfont">-rodent, -"Jack Russell"</span></label>
+                        </div>
+                    </div>
+
+                    <div class = "adv-search-options">
+                        <div class = "adv-search-opt">
+                        </div>
+                        <div class = "adv-search-input">
+                            <input id = "adv-button" type="submit" value="Advanced Search">
+                        </div>
+                        <div class = "adv-search-ex">
+                        </div>
+                    </div>
+                </div>
+            </form>
+                
+                <div id="adv-button-container"></div>
+            </div>
+            <div class = "line-div"></div>
+
+        </div>
+    </body>
+</html>
