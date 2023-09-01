@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    background-color: white;
+
+}
+
+code {
+    white-space: pre;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.sidebar {
+    background-color: RGBA(41,6,97,0.85)!important;
+    height: 100vh;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-right: 20px;
+    width: 320px;
+    color: #fff!important;
+   
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    color: RGBA(41,6,97,0.85);
+}
+
+
+.header {
+    background-color: RGBA(133,64,245,1);
+    width: 100%;
+    height: 72px;
+    display: flex;
+    box-sizing: border-box;
+    border-color: RGBA(41,6,97,0.85);
+    border-width: 1px;
+    border-bottom-style: solid;
+}
+
+.pagecontent {
+    background-color: RGBA(224,207,252,1);
+    height: 100%;
+    padding: 30px;
+    font-size: large;
+
+}
+
+.pagecontent ul {
+    padding-inline-start: 30px;
+}
+
+.pagecontent ul li a {
+    text-decoration: none;
+    color: RGBA(41,6,97,0.85);
+}
+
+.sidebar h2 {
+    margin-top: 5px;
+}
+
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #f8f9fa;
+}
+
+
+h1 {
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 7px;
+    margin-left: 30px;
+    color: RGBA(41,6,97,0.85)
+}
+
+textarea {
+    height: 50%;
+    width: 80%;
+}
+
+.main {
+    padding: 10px;
+}
+
+.search {
+    width: 100%;
+    font-size: 15px;
+    line-height: 15px;
+    margin-bottom: 10px;
+}
+
+
+
+hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid;
+    opacity: .25;
+    color: #fff!important;
+    margin-block-start: 0.5em;
+
+}
+
+
+h3.failure {
+    color: red;
+}
+
+#id_title {
+    width: 50%;
+    border-color: RGBA(41,6,97,0.85);
+    border-width: 1px;
+}
+
+#id_desc {
+    width: 100%;
+    border-color: RGBA(41,6,97,0.85);
+    border-width: 1px;
+}
+
+.btn{
+    background-color: RGBA(133,64,245,1);
+    color: RGBA(41,6,97,0.85);
+    font-weight: 600;
+}

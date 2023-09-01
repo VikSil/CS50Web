@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en" data-bs-theme="light">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row">
+            <div class="sidebar">
+                <h2>CS50 Web Wiki</h2>
+                <hr>
+                <form action = "{% url 'encyclopedia:findpage'%}" method = "POST" >
+                    {% csrf_token %}
+                    <input class="search" type="text" name="q" placeholder="Search Wiki">
+                </form>
+                <hr>
+                <div class ="navigation">
+                    <a href="{% url 'encyclopedia:index' %}">Home</a>
+                </div>
+                <div class ="navigation">
+                    <a href="{% url 'encyclopedia:addpage' %}">Create New Page</a>
+                    
+                </div>
+                <div class ="navigation">
+                    <a href = "{% url 'encyclopedia:randompage' %}">Random Page</a>
+                    
+                </div>
+            </div>
+            <div class="content">
+                <div class = "header"><h1>
+                {% block header%}
+                {% endblock%}    
+                </h1></div>
+                <div class = "pagecontent">
+                    {% block pagecontent %}
+                    {% endblock %}
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>

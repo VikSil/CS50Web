@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{pagename}} 
+{% endblock %}
+
+{% block header %}
+    {{pagename}} in the Form Below
+{% endblock %}
+
+{% block pagecontent %}
+    {% if error %}
+    <h3 class = "failure">
+        {{error}}
+    </h3>
+    {% endif %}
+
+    <form action = "{% url 'encyclopedia:addpage' %}"  method = "POST" >
+        {% csrf_token %}
+        {{ addpageform.as_p}}
+        <input type = "submit" value = "Save Entry" class = "btn"></input>
+    </form>
+
+{% endblock %}
