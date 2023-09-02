@@ -45,7 +45,8 @@ def get_page(request,pagename):
         return render(request, "encyclopedia/entrypage.html",{
             "entry" : markdowner.convert(util.get_entry(pagename)),
             "pagename" : pagename 
-    })
+        })
+ 
 
 def add_page(request):
     """
@@ -66,11 +67,11 @@ def add_page(request):
                 "error" : "This entry already exists",
                 "pagename" : "Add New Entry "
                 })
-            #if new entry or user editing existing entry - save it
+            #if new entry - save it
             else:
                 adddesc = addedpage.cleaned_data["desc"]
-                util.save_entry(addtitle.title(), adddesc)
-                return get_page(request, addtitle.title())
+                util.save_entry(addtitle, adddesc)
+                return get_page(request, addtitle)
         #if input not valid - throw the error back at the user
         else:
             return render(request, "encyclopedia/addpage.html", {
@@ -96,7 +97,13 @@ def edit_entry(request):
     
     # if POST - user clicked 'Edit butotn on an existing entry'
     else:
+        #replace the description witht the markdown version of it
+        postcopy = request.POST.copy()
+        postcopy["desc"] = util.get_entry(postcopy["title"])
+        request.POST = postcopy
         editpage = NewEntryForm(request.POST)
+
+        #then pass the entry data to edit page
         return render (request, "encyclopedia/addpage.html", {
                 "addpageform":editpage,
                 "pagename" : "Edit Entry "

@@ -23,7 +23,7 @@ def save_entry(title, content):
     filename = f"entries/{title}.md"
     if default_storage.exists(filename):
         default_storage.delete(filename)
-    default_storage.save(filename, ContentFile(content))
+    default_storage.save(filename, ContentFile(content.encode('ascii')))
 
 
 def get_entry(title):
@@ -48,12 +48,6 @@ def get_random_entry():
     #pick a random one and return
     return all_entries[randint(0, len(all_entries)-1)]
 
-def save_entry(filename, content):
-    """
-    Saves the input in a form to a markdown file
-    """
-    with default_storage.open(f"entries/{filename}.md", "w") as file:
-        file.write(content)
     
 def find_entry(entryname):
     """
