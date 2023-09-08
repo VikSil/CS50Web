@@ -15,7 +15,7 @@
                 <hr>
                 <form action = "{% url 'encyclopedia:findpage'%}" method = "POST" >
                     {% csrf_token %}
-                    <input class="search" type="text" name="q" placeholder="Search Wiki">
+                    <input class="search" type="text" name="q" placeholder="Search Wiki" autocomplete="off">
                 </form>
                 <hr>
                 <div class ="navigation">
