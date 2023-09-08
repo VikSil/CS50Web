@@ -8,8 +8,8 @@ For this problem set a replica of Google's front-end needs to be developed. This
 
 + Technologies: HTML, CSS
 + [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/0/search/)
-+ [Video submission] (https://youtu.be/CznRTOHmMr0)
-+ [Code] (https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/0_search)
++ [Video submission](https://youtu.be/CznRTOHmMr0)
++ [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/0_search)
 
 
 ## Problem Set 1 - Wiki
@@ -18,5 +18,5 @@ For this problem a wiki-like website needs to be developed where users can brows
 
 + Technologies: Django, Python, HTML, CSS
 + [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/1/)
-+ [Video submission] (https://youtu.be/e2JhwnXaUZg)
-+ [Code] (https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/1_CS50_wiki)
++ [Video submission](https://youtu.be/e2JhwnXaUZg)
++ [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/1_CS50_wiki)
