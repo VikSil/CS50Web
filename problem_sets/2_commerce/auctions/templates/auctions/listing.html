@@ -1,0 +1,194 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<!-- Container of the listing and comments -->
+<div class="container text-ultramarine">
+    <!-- Listing container -->
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-column flex-md-row border border-5 border-silverrim rounded-4 bg-deepyellow">
+            <!-- Listing image or placeholder-->
+            <div id="listing-image" class="d-flex align-self-center m-1">
+                <div>
+                    {%if listing.imageURL%}
+                    <img src="{{listing.imageURL}}">
+                    {%else%}
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/0/07/Picture-front-color_with_pushed_back_sun.png">
+                    {%endif%}
+                </div>
+            </div>
+            <!-- Listing body-->
+            <div class="d-flex flex-column flex-fill">
+                <!-- Description and bidding-->
+                <div class="flex-fill">
+                    <!-- Listing title-->
+                    <div class="text-center mt-2">
+                        <h4 class="display-5 mb-3">{{listing.title}}</h4>
+                    </div>
+                    <!-- Listing description-->
+                    <div class="me-sm-1 py-1 px-2 justified border-top border-bottom border-silverrim">
+                        {{listing.description}}
+                    </div>
+                    <!-- Bidding section-->
+                    <div class="listing-bidding px-2 mb-auto">
+                        <!-- If listing active - display bidding section-->
+                        {%if listing.active %}
+                        <!-- Listing current max bid (or starting bid if no bids received yet)-->
+                        <div class="d-flex justify-content-center justify-content-sm-start fw-bolder my-2">
+                            {% if max_bid.IsStarting %}
+                            Minimum starting bid: ${{max_bid.amount|floatformat:2}}
+                            {% else %}
+                            Current winning bid: ${{max_bid.amount|floatformat:2}}
+                            {% endif %}
+                        </div>
+                        <!-- Bid input section-->
+                        <div class="d-flex flex-column flex-sm-row align-items-center mb-2">
+                            <!-- If user is the author - cannot bid-->
+                            {%if user.username == listing.UserID.username%}
+                            <div>
+                                You cannot bid on your own listings.
+                                <!-- If user is the author - display Close button -->
+                                <form action=" {% url 'auctions:listing' listing.id%}" method="POST"
+                                    class=" row row-cols-auto">
+                                    {% csrf_token %}
+                                    <div class="col-12 d-flex justify-content-center justify-content-sm-start">
+                                        <input class="btn rounded-pill px-3 mt-1 bg-silverrim h-4 cat" type="submit"
+                                            value="Close Active Listing" name="close-sub" id="close-btn"></input>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- If the user not logged in - don't show bidding section -->
+                            {%elif user.is_anonymous%}
+                            <div>
+                                Please log in to bid on listings.
+                            </div>
+                            <!-- Bidding section -->
+                            {%else%}
+                            <div class="d-flex justify-content-center justify-content-sm-start me-sm-4">
+                                <form action="{% url 'auctions:listing' listing.id%}" method="POST"
+                                    class="row row-cols-auto justify-content-center justify-content-sm-start">
+                                    {% csrf_token %}
+                                    <!-- New bid field - Model Form field -->
+                                    <div class="col-sm-10 col-9 d-flex justify-content-center">{{bidform}}</div>
+                                    <!-- Bid submit button-->
+                                    <div class="col-sm-2 col-12 d-flex justify-content-center"><input
+                                            class="btn rounded-pill my-2 my-sm-0 px-3 mx-3 bg-silverrim h-4 cat"
+                                            type="submit" value="Bid" name="bid-sub" id="bid-btn"></input></div>
+                                </form>
+                            </div>
+                            <!-- Listing watch button section -->
+                            <div>
+                                <form action="{% url 'auctions:listing' listing.id%}" method="POST"
+                                    class="d-flex justify-content-center">
+                                    {% csrf_token %}
+                                    <!-- If watching - display Unwatch button -->
+                                    {%if watching%}
+                                    <input type="submit" class="btn rounded-pill px-3 bg-silverrim h-4 cat"
+                                        value="Unwatch" name="watch-sub" id="unwatch-btn"></input>
+                                    <!-- If not watching - display Watch button -->
+                                    {%else%}
+                                    <input type="submit" class="btn rounded-pill px-3 bg-silverrim h-4 cat"
+                                        value="Watch" name="watch-sub" id="watch-btn"></input>
+                                    {%endif%}
+                                </form>
+                            </div>
+                            {%endif%}
+
+                        </div>
+
+                        <!-- If listing closed - display results section-->
+                        {%else%}
+                        <div>
+                            <!-- If no bids received on the listing-->
+                            {%if max_bid.IsStarting%}
+                            <h4>There were no bids placed on this auction.</h4>
+                            <!-- If any bids received on the listing-->
+                            {%else%}
+                            <div class="d-flex flex-column flex-sm-row align-items-center fw-bolder my-2">
+                                <!-- Winning bid amount-->
+                                <div>
+                                    Winning bid: ${{max_bid.amount|floatformat:2}}
+                                </div>
+                                <!-- Winner-->
+                                <div class="ms-0 ms-sm-3">
+                                    <!-- If not current user - display winner name-->
+                                    {%if user.username == listing.UserID.username%}
+                                    The winner is {{winner}}
+                                    <!-- If current user - congratulate them-->
+                                    {%elif user.username == winner.username %}
+                                    Congratulations! You won this auction.
+                                    {%endif%}
+                                </div>
+
+
+                            </div>
+                            <!-- Diaplay notification that the listing is closed-->
+                            {%endif%}
+                            <div class="d-flex justify-content-center justify-content-sm-start fw-bolder my-2">
+                                This listing is Closed now.
+                            </div>
+                        </div>
+                        {%endif%}
+
+                    </div>
+
+                </div>
+                <!-- Listing footer-->
+                <div
+                    class="d-flex flex-sm-row flex-column align-items-center justify-content-center justify-content-sm-between me-sm-1 py-1 px-2 border-top border-silverrim">
+                    <!-- Listing category-->
+                    <div>
+                        Category: {{listing.CategoryID}}
+                    </div>
+                    <!-- Listing author-->
+                    <div class="flex-fill text-end fs-6 fw-semibold">
+                        Listing created by {{listing.UserID}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comment container -->
+    <div class="d-flex flex-column border border-5 border-silverrim rounded-4 bg-deepyellow mt-4 text-ultramarine">
+        <div class="p-2">
+            <!-- Check if user's own listing -->
+            {%if user.username == listing.UserID.username%}
+            <h4>You cannot comment on your own listings.</h4>
+            <!-- Check if user not logged in -->
+            {%elif user.is_anonymous%}
+            <h4>Please log in to comment on the listings.</h4>
+
+            {%else%}
+            <!-- Comment entry form -->
+            <form action="{% url 'auctions:listing' listing.id%}" method="POST">
+                {% csrf_token %}
+                <h4>Comment On This Item:</h4>
+                <input type="text" id="comment-field" name="comment-field" autocomplete="off" class="form-control mb-2"
+                    required>
+                <input type="submit" value="Comment" name="comment-sub" id="comment-btn"
+                    class="btn rounded-pill px-3 bg-silverrim h-4 cat"></input>
+            </form>
+            {%endif%}
+        </div>
+        <!-- All exisitng comments on the listing -->
+        {% for comment in comments %}
+        <div class="border border-2 rounded-3 m-1">
+            <div class="ps-2 justified fw-bolder mb-0">
+                <!-- Who commented when-->
+                {{comment.UserID}} commented on
+                {{comment.when|date:'jS'}} of {{comment.when|date:'F Y'}} at {{comment.when|time:'H:i'}}
+            </div>
+            <div class="border-top p-2">
+                <!-- Comment text -->
+                {{comment.text}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

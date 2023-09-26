@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<!-- Title of the page -->
+<div class="text-center">
+    <h2 class="display-5 mb-3">Add listing in the form below</h2>
+</div>
+
+<!-- Form -->
+<div class="container">
+    <div class="d-flex flex-column justify-content-center m-5 ">
+
+        <form action="{% url 'auctions:add' %}" method="POST">
+            {% csrf_token %}
+            <!-- Auction model form -->
+            {{newauctionform.as_p}}
+            <!-- Bid model form  - renders field for the minimum bid amount -->
+            {{newbidform.as_p}}
+            <!-- Submit button -->
+            <input type="submit" value="Add Auction" id="btn"
+                class="btn rounded-pill px-3 mt-2 bg-silverrim h-4 cat"></input>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

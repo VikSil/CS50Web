@@ -1,0 +1,83 @@
+$ultramarine: #010F42;
+$deepyellow: #FFAE42;
+$lilacrim: #9b5eeb;
+$purplerim: #5b25a1;
+$silverrim: #D4D5D9;
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+$color-palette: (
+    "ultramarine" : $ultramarine,
+    "deepyellow": $deepyellow,
+    "silverrim": $silverrim,
+    "purplerim": $purplerim, 
+    "lilacrim": $lilacrim,
+);
+
+$theme-colors: map-merge($color-palette, $theme-colors);
+
+//import bootstrap distributable;
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+.listing {
+    max-width: 20%;
+    min-width: 250px;
+}
+
+img {
+    width: 100%;
+}
+
+.justified {
+    text-align: justify;
+}
+
+a {
+    color: $ultramarine;
+    background-color: transparent;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+  }
+
+a:hover{
+    color: $purplerim;
+    text-decoration: none;
+}
+
+.cat:hover {
+    color: $purplerim;    
+}
+
+input:hover{
+    color: $purplerim;
+    text-decoration: none;
+}
+
+.cat-link a:hover {
+    color: $purplerim;
+}
+
+.flex-even {
+    flex:1;
+}
+
+.border-tag {
+    border-color: silver;
+    border-style: double;
+    border-width: 1px; 
+}
+
+#listing-image {
+    max-width: 30%;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+.bid-field {
+    box-sizing: content-box;
+}

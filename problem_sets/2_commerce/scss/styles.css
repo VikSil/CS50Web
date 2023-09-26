@@ -1,0 +1,86 @@
+.border-tag {
+  border-color: red;
+  border-style: double;
+  border-width: 1px;
+}
+
+#btn {
+  border: 6px solid black;
+  color: green;
+}
+
+.listing-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.listing {
+  margin: 5px;
+  padding: 10px;
+  border-color: red;
+  border-width: 1px;
+  border-style: double;
+  background-color: rgb(255, 199, 46);
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  min-width: 100px;
+  flex: 1;
+  flex-basis: 20%;
+}
+
+.listing-sub {
+  max-width: 100%;
+  text-decoration: none;
+}
+
+.listing-title {
+  text-align: center;
+}
+
+.listing-price {
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(129, 16, 16);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.listing-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.noncomments {
+  display: flex;
+  flex-direction: row;
+}
+
+#listing-image {
+  width: 20%;
+  height: 20%;
+}
+
+#listing-comments {
+  display: flex;
+  flex-direction: column;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -20,3 +20,13 @@ For this problem a wiki-like website needs to be developed where users can brows
 + [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/1/)
 + [Video submission](https://youtu.be/e2JhwnXaUZg)
 + [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/1_CS50_wiki)
+
+
+## Problem Set 3 - Commerce
+
+For this problem an eBay-like website needs to be developed where users can place bids on auctions and can create auctions of their own. The solution to this problem set utilises Django framework and SQLite.
+
++ Technologies: Django, SQLite, Python, HTML, CSS, Bootstrap
++ [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/2/)
++ [Video submission](https://youtu.be/V4-v88ylnH0)
++ [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/2_commerce)

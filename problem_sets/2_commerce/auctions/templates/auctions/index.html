@@ -1,0 +1,60 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<!-- Title of the page -->
+<div class="text-center">
+    <h2 class="display-5 mb-3">{{title}}</h2>
+</div>
+
+<!-- Listings -->
+<div class="container">
+    <div class="row justify-content-center">
+        {%for listing in listings%}
+
+        <!-- Define card -->
+
+        <div class="col-3 card border border-5 border-silverrim rounded-4 bg-deepyellow m-3 listing">
+            <!-- Can click anywhere to on the card to activate link to the listing -->
+            <a href="{%url 'auctions:listing' listing.id%}" class="d-flex flex-column">
+                <!-- Listing title-->
+                <div class="text-center pt-1">
+                    <h4>{{listing.title}}</h4>
+                </div>
+                <!-- Listing image-->
+                <div>
+                    {%if listing.imageURL%}
+                    <img src="{{listing.imageURL}}">
+                    {%else%}
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/0/07/Picture-front-color_with_pushed_back_sun.png">
+                    {%endif%}
+                </div>
+                <!-- Container of text items-->
+                <div class="d-flex flex-column flex-grow-1 justify-content-between">
+                    <!-- Listing description-->
+                    <div class="m-2 justified">
+                        {{listing.description}}
+                    </div>
+                    <!-- Price and status container - container aligns these items to the bottom -->
+                    <div>
+                        <!-- Listing max bid -->
+                        <div class="text-center pe-2 pt-2 border-top border-bottom border-color-silverrim">
+                            <h6>${{listing.max_bid|floatformat:2}}</h6>
+                        </div>
+                        <!-- Listing status -->
+                        <div class="text-center py-1 small">
+                            {%if listing.active%}
+                            <p class="mb-0">This listing is Active</p>
+                            {%else%}
+                            <p class="mb-0">This listing is Closed</p>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        {%endfor%}
+    </div>
+</div>
+{% endblock %}

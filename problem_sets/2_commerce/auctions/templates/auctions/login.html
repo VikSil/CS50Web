@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<!-- Title of the page -->
+<div class="text-center">
+    <h2 class="display-5 mt-3 mb-4">Login</h2>
+</div>
+
+<!-- Login error -->
+{% if message %}
+<div class="container ms-5 mb-3">{{ message }}</div>
+{% endif %}
+
+<!-- Login form -->
+<div class="container">
+    <div class="d-flex flex-column justify-content-center mx-5">
+
+        <form action="{% url 'auctions:login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group my-4">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <input class="btn rounded-pill px-3 bg-silverrim h-4 cat" type="submit" value="Login">
+        </form>
+
+        <!-- Footer -->
+        <p class="nav-item mt-3">Don't have an account? <a href="{% url 'auctions:register' %}"
+                class="text-lilacrim">Register here.</a></p>
+
+    </div>
+</div>
+
+{% endblock %}

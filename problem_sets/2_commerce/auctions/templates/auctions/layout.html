@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}CS50 Web Auctions{% endblock %}</title>
+    <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+
+</head>
+<!-- Website title, visible on all pages -->
+
+<body class="bg-ultramarine text-silverrim">
+    <div class="text-center mt-5 mb-4">
+        <h1 class="display-2">CS50 Web Auctions</h1>
+    </div>
+    <!-- Login status -->
+    <div class="text-end pe-4 border-top border-bottom border-silverrim">
+        {% if user.is_authenticated %}
+        Signed in as <strong>{{ user.username }}</strong>
+        {% else %}
+        Not signed in
+        {% endif %}
+    </div>
+
+    <!--Navigation pane -->
+    <ul class="nav nav-tabs justify-content-center mt-4 mb-5">
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:index' %}">Active Listings</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:categories' %}">Categories</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:add' %}">Add Listing</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:watchlist' %}">Watchlist</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:logout' %}">Log Out</a>
+        </li>
+        {% else %}
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:login' %}">Log In</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="nav-link text-silverrim display-6" href="{% url 'auctions:register' %}">Register</a>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>
