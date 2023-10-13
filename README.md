@@ -22,7 +22,7 @@ For this problem a wiki-like website needs to be developed where users can brows
 + [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/1_CS50_wiki)
 
 
-## Problem Set 3 - Commerce
+## Problem Set 2 - Commerce
 
 For this problem an eBay-like website needs to be developed where users can place bids on auctions and can create auctions of their own. The solution to this problem set utilises Django framework and SQLite.
 
@@ -30,3 +30,12 @@ For this problem an eBay-like website needs to be developed where users can plac
 + [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/2/)
 + [Video submission](https://youtu.be/V4-v88ylnH0)
 + [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/2_commerce)
+
+## Problem Set 3 - Mail
+
+For this problem a simulated email front-end needs to be developed. The solution to this problem set utilises Javascript to send asynchronous calls to API and display relevants parts of the single-page application.
+
++ Technologies: Django, SQLite, Python, HTML, CSS, Bootstrap, JavaScript
++ [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/3/)
++ [Video submission](https://youtu.be/X9DTrJSlbCY)
++ [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/3_mail)

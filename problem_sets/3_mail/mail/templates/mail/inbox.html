@@ -1,0 +1,93 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+<!-- The Navigation - always visible -->
+<div class="d-flex flex-row justify-content-between border-bottom mt-5 mb-4 pb-3">
+    <div class="d-flex align-items-end px-2">
+        <!-- -->
+        <div>
+            <!-- Navigation buttons -->
+            <button class="btn btn-sm btn-dark btn-outline-light" id="inbox">Inbox</button>
+            <button class="btn btn-sm btn-dark btn-outline-light" id="compose">Compose</button>
+            <button class="btn btn-sm btn-dark btn-outline-light" id="sent">Sent</button>
+            <button class="btn btn-sm btn-dark btn-outline-light" id="archived">Archived</button>
+            <a class="btn btn-sm btn-dark btn-outline-light" href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+    <!-- User identity -->
+    <div class="d-flex flex-column align-items-end">
+        <p class="m-0 p-0"><small>Logged in as:</small></p>
+        <h2 class="blockquote m-0 p-0" id="mailbox-owner">{{ request.user.email }}</h2>
+    </div>
+</div>
+
+
+<!-- Mailbox - dynamically filled in by JS for the mailbox that user is viewing -->
+<div id="emails-view">
+
+</div>
+
+<!-- New Email form -->
+<div id="compose-view">
+    <h3>New Email</h3>
+    <form id="compose-form">
+        <div class="form-group">
+            <!-- Sender e-mail address filled in automatically and input disabled -->
+            From: <input disabled class="form-control" value="{{ request.user.email }}">
+        </div>
+        <div class="form-group">
+            To: <input id="compose-recipients" class="form-control">
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="compose-subject" placeholder="Subject">
+        </div>
+        <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+        <input type="submit" value="Send Email" class="btn btn-primary mt-3 bg-secondary border-secondary" />
+    </form>
+</div>
+
+<!-- Dispaly email - visible when user clicks on an email in any mailbox -->
+<div id="open-view">
+    <!-- Email metadata -->
+    <div class="border bg-light py-1 px-3 m-2">
+        <div class="d-flex">
+            <!-- Email ID to keep track of which email user is viewing, set to invisible by JS-->
+            <p id="email-id">''</p>
+        </div>
+        <div class="d-flex">
+            <p class="my-0 mr-1 p-0 heavy small">When:</p>
+            <p class="my-0 p-0 small" id="email-time">''</p>
+        </div>
+        <div class="d-flex">
+            <p class="my-0 mr-1 p-0 heavy small">From:</p>
+            <p class="my-0 p-0 small" id="email-sender">''</p>
+        </div>
+        <div class="d-flex">
+            <p class="my-0 mr-1 p-0 heavy small">To:</p>
+            <p class="my-0 p-0 small" id="email-recipient">''</p>
+        </div>
+        <div class="d-flex">
+            <p class="my-0 mr-1 p-0 heavy small">Subject:</p>
+            <p class="my-0 p-0 small" id="email-subject"></p>
+        </div>
+
+    </div>
+    <!-- Email text -->
+    <div class="border bg-light px-3 mx-2 mt-3">
+        <span style="white-space: pre-line">
+            <p id="email-body">''</p>
+        </span>
+    </div>
+    <!-- Buttons to Reply and Archive/Unarchive-->
+    <div class="px-2" id="email-buttons">
+        <button id="email-reply" class="btn btn-primary mt-3 bg-secondary border-secondary">Reply</button>
+        <button id="email-archive" class="btn btn-primary mt-3 bg-secondary border-secondary">''</button>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

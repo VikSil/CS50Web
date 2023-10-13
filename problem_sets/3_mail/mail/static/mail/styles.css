@@ -1,0 +1,23 @@
+body {
+    background-color: lightpink;
+
+  }
+
+textarea {
+    min-height: 400px;
+}
+
+h3 {
+
+    text-align: center;
+    margin-bottom: 1rem;
+
+}
+
+.heavy{
+    font-weight: 600;
+}
+
+.small {
+    font-size: 80%;
+}
