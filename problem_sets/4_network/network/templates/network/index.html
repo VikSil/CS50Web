@@ -1,5 +1,119 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    TODO
+{% load static %}
+
+
+
+<div class="p-2">
+    {% if user.is_authenticated %}
+    {% if newpost %}
+    <div id="new-post" class="border my-3 p-3">
+
+        <form action="{% url 'post' %}" method="POST" id="post-form">
+            {% csrf_token %}
+            <textarea class="form-control m-3" id="post-message" name="post-message" placeholder="Say Y" maxlength="150"
+                required></textarea>
+            <input type="submit" value="Post" class="btn btn-primary m-3 bg-secondary border-secondary" />
+        </form>
+    </div>
+    {%endif%}
+    {%endif%}
+
+    {%if profile %}
+    <div id="profile" class="border my-3 p-3">
+        THIS IS WHERE PROFILE INFORMATION WILL GO IN
+
+        <div class="border my-3 p-3">
+            <p id="profile-name">@{{username}}</p>
+        </div>
+        <div>
+            <p>Followers: </p>
+            <p id="follower-count">{{followers}}</p>
+            <p>Following: </p>
+            <p id="following-count">{{following}}</p>
+        </div>
+        {% if user.is_authenticated and user.username != username %}
+        <div>
+            <button id="user-follow">{{button}}</button>
+        </div>
+        {%endif%}
+    </div>
+    {%endif%}
+
+
+    <div id="all-posts" class="border my-3 p-3">
+        THIS IS WHERE ALL PASSED POSTS WILL BE DISPLAYED
+        {%for post in posts.object_list%}
+        <div class="border my-3 p-3">
+            <div>
+                <p id="post-id-{{post.id}}">Post id: {{post.id}}</p>
+                <!--This should really be a href to the author's profile-->
+                <p id="post-author-{{post.id}}">Post author: <a
+                        href="{% url 'profile' post.UserID %}">{{post.UserID}}</a></p>
+                <p id="post-message-{{post.id}}">{{post.message}}</p>
+
+
+                <textarea class="form-control post-edit-box" id="post-edit-{{post.id}}" placeholder="{{post.message}}"
+                    maxlength="150" required></textarea>
+
+
+                <p id="post-timestamp-{{post.id}}">Post timestamp: {{post.timestamp}}</p>
+            </div>
+            <div>
+
+                <div id="post-like-div-{{post.id}}">
+                    <input type="image" class="like-btn" id="post-like-{{post.id}}" {%if user in post.likedby.all %}
+                        src="https://i.imgur.com/otvk4cY.png" alt="UnlikeButton" {% else %}
+                        src="https://i.imgur.com/cU9dp5s.png" alt="LikeButton" {% endif %}
+                        style="width:30px;height:30px;" />
+                </div>
+
+
+            </div>
+            <div>
+                <p id="post-likecount-{{post.id}}">{{post.likedby.all.count}}</p>
+            </div>
+            {% if user.is_authenticated and user.username == post.UserID.username %}
+            <div>
+                <button class="post-edit-btn" id="edit-post-{{post.id}}">Edit Y</button>
+            </div>
+            {% endif %}
+
+        </div>
+        {%endfor%}
+
+        <nav>
+            <ul class="pagination">
+                {% if posts.has_previous %}
+                <li class="page-item " id="previous-posts">
+                    <a class="page-link" href="?page={{posts.previous_page_number}}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item  disabled" id="previous-posts">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+                {% endif %}
+
+                {% if posts.has_next %}
+                <li class="page-item" id="next-posts">
+                    <a class="page-link" href="?page={{posts.next_page_number}}">Next</a>
+                </li>
+                {%else%}
+                <li class="page-item disabled" id="next-posts">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'network/network.js' %}"></script>
 {% endblock %}
