@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<!-- Head, links to stylesheets -->
 
 <head>
     <title>{% block title %}Social Network{% endblock %}</title>
@@ -12,43 +13,80 @@
     {% endblock %}
 </head>
 
+<!-- Body with navigation pane -->
+
 <body>
+    <div class="container">
+        <div class="d-flex flex-column">
+            <nav class=" bg-success">
+                <div>
+                    <!-- Justify content between to push side content to sides and center middle content -->
+                    <ul class="nav d-flex justify-content-between">
+                        <!-- Left side - User name and Following link -->
+                        <div class="d-flex flex-column flex-fill col-5">
+                            <div>
+                                <!-- Only show these links to authorised users -->
+                                {% if user.is_authenticated %}
+                                <!-- Link to user's own profile -->
+                                <li class="nav-item">
+                                    <h4> <a class="nav-link outlined outlined-link"
+                                            href="{% url 'profile' user.username%}"><strong>{{user.username}}</strong></a>
+                                    </h4>
+                                </li>
+                                <!-- Link to Following -->
+                                <div class="d-flex justify-content-center justify-content-md-start">
+                                    <li class="nav-item">
+                                        <h5> <a class="nav-link outlined outlined-link"
+                                                href="{% url 'following' %}">Following</a>
+                                        </h5>
+                                    </li>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">Network</a>
+                        <!-- Center content - Site logo with embeded link to all post -->
+                        <div class="d-flex justify-content-center justify-content-md-end my-2 mr-2">
+                            <li class="nav-item ">
+                                <h5> <a href="{% url 'index' %}"><img src="https://i.imgur.com/I87Nm5Z.png"
+                                            style="width:100px;height:100px;"></a></h5>
+                            </li>
+                        </div>
 
-        <div>
-            <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' user.username%}"><strong>{{ user.username }}</strong></a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">All Posts</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'following' %}">Following</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-                {% endif %}
-            </ul>
+                        <!-- Right side - Log out, Log in, Register links -->
+                        <div class="d-flex flex-column  flex-fill col-5">
+                            <!-- If user authenticated, show Log Out link -->
+                            {% if user.is_authenticated %}
+                            <div class="d-flex justify-content-center justify-content-md-end">
+                                <li class="nav-item">
+                                    <h5> <a class="nav-link outlined outlined-link" href="{% url 'logout' %}">Log
+                                            Out</a></h5>
+                                </li>
+                            </div>
+                            <!-- If user not authorised, show Log In and Register links -->
+                            {% else %}
+                            <div class="d-flex justify-content-center justify-content-md-end">
+                                <li class="nav-item">
+                                    <h5> <a class="nav-link outlined outlined-link" href="{% url 'login' %}">Log In</a>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="d-flex justify-content-center justify-content-md-end">
+                                <li class="nav-item">
+                                    <h5> <a class="nav-link outlined outlined-link"
+                                            href="{% url 'register' %}">Register</a></h5>
+                                </li>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+            <div class="body">
+                {% block body %}
+                {% endblock %}
+            </div>
         </div>
-    </nav>
-
-    <div class="body">
-        {% block body %}
-        {% endblock %}
     </div>
 </body>
 

@@ -2,29 +2,36 @@
 
 {% block body %}
 
-    <h2>Register</h2>
-
+<div class="green-border button-container mt-3 px-3 pt-3">
+    <!-- Title -->
+    <div class="mb-3">
+        <h3 class="text-uppercase outlined">Register</h3>
+    </div>
+    <!-- Error message for failed registration -->
     {% if message %}
-        <div>{{ message }}</div>
+    <div class="mb-2 text-success">{{ message }}</div>
     {% endif %}
-
+    <!-- Registration form -->
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+            <input class="form-control border-success" autofocus type="text" name="username" placeholder="Username">
         </div>
         <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
+            <input class="form-control border-success" type="email" name="email" placeholder="Email Address">
         </div>
         <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+            <input class="form-control border-success" type="password" name="password" placeholder="Password">
         </div>
         <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+            <input class="form-control border-success" type="password" name="confirmation"
+                placeholder="Confirm Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Register">
+        <input class="btn btn-green my-2" type="submit" value="Register">
     </form>
+    <!--Link to Login form -->
+    <p class="text-success">Already have an account? <a class="outlined outlined-link" href="{% url 'login' %}">Log In
+            here.</a></p>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
-
+</div>
 {% endblock %}

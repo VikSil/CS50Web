@@ -1,0 +1,69 @@
+.green-border{
+    border-width: 5px;
+    border-color: #5cb85c;
+    border-radius: 1.5rem;
+    border-style: solid;
+    background-color: #bfffbf;
+}
+
+a:not([href]) {
+    background-color: #bfffbf;
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #5cb85c;
+}
+
+a:not([href]):hover{
+    color: #5cb85c;
+} 
+
+.button-container{
+    text-align:center;
+}
+
+.outlined
+{
+    color: yellow;
+    text-shadow:
+    -1px -1px 0 #5cb85c,
+    1px -1px 0 #5cb85c,
+    -1px 1px 0 #5cb85c,
+    1px 1px 0 #5cb85c;  
+}
+
+.outlined-link:hover{
+    color: yellow;
+    text-decoration: underline;
+}
+
+.enabled-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+}
+
+.btn-green {
+    background-color: #5cb85c;
+    color: yellow;
+}
+
+.btn-green:hover {
+    background-color:#1e7e34;
+}
+
+.btn-green:focus {
+    background-color:#1e7e34;
+    border-color: #bfffbf;
+    box-shadow: 0 0 0 0.2rem rgba(30,126,52,.25);
+}
+
+.form-control:focus{
+    color: #1e7e34;
+    border-color: #bfffbf;
+    box-shadow: 0 0 0 0.2rem rgba(30,126,52,.25);
+}

@@ -7,6 +7,10 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
+    """
+    Model for post data
+    """
+
     UserID = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="post_author"
     )
@@ -19,6 +23,10 @@ class Post(models.Model):
 
 
 class Following(models.Model):
+    """
+    Links between User model rows to keep track of who follows whom
+    """
+
     CreatorID = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_followed"
     )

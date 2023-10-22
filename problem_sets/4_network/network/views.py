@@ -1,25 +1,37 @@
 import json
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import JsonResponse
-from django.core.paginator import Paginator
-
 
 from .models import *
 
 
 def index(request):
-    all_posts = Post.objects.all().order_by("-id")
-    p = Paginator(all_posts, 10)
+    """
+    Displays All Posts page
+    Takes a new post and saves it to the DB
+    """
+    # if POST, then save the new post for the current user
+    if request.method == "POST":
+        new_post = Post()
+        new_post.UserID = User.objects.get(id=request.user.id)
+        new_post.message = request.POST.get("post-message")
+        new_post.save()
 
+    # Get all posts in reverse order
+    all_posts = Post.objects.all().order_by("-id")
+    # Create paginator
+    p = Paginator(all_posts, 10)
+    # By default return first page, or another is user asked for another
     page = 1
     if request.GET.get("page"):
         page = request.GET.get("page")
 
+    # Return data to display on All Posts page
     return render(
         request,
         "network/index.html",
@@ -29,19 +41,24 @@ def index(request):
 
 @login_required
 def following(request):
+    """
+    Displays posts from all users that the current user follows
+    Only works for authorised users
+    """
     # Fetch all the users whom current user follows
     following = Following.objects.filter(FollowerID=request.user.id).values_list(
         "CreatorID_id"
     )
-    # Fetch all posts by those users and order by id descending
+    # Fetch all posts by those users in descending order
     followed_posts = Post.objects.filter(UserID__in=following).order_by("-id")
+    # Create a paginator
     p = Paginator(followed_posts, 10)
-
+    # By default return first page, or another is user asked for another
     page = 1
     if request.GET.get("page"):
         page = request.GET.get("page")
 
-    # Render the website
+    # Return data to display on Following page
     return render(
         request,
         "network/index.html",
@@ -50,78 +67,102 @@ def following(request):
 
 
 def edit_post(request):
+    """
+    Takes data from an edited post and saves it to the DB
+    """
+    # Can only be accessed by PUT, otherwise does nothing
     if request.method == "PUT":
+        # Get current user
         user = User.objects.get(id=request.user.id)
+        # Get the new message from PUT
         data = json.loads(request.body)
+        # Get the post to be edited
         post = Post.objects.get(pk=data["postID"])
 
+        # Check that the user that sent PUT is the user who made the post
         if post.UserID == user:
-            print("Match")
+            # Amend post and save
             post.message = data["message"]
             post.save(update_fields=["message"])
         return HttpResponse(status=204)
 
 
 def like_post(request):
+    """
+    Takes data from post (un)like and saves it to the DB
+    """
+    # Can only be accessed by PUT, otherwise does nothing
     if request.method == "PUT":
+        # Get current user
         user = User.objects.get(id=request.user.id)
+        # Get the like data from PUT
         data = json.loads(request.body)
-        post = Post.objects.get(pk=data["postID"])
         like = data["like"]
+        # Get the post to be edited
+        post = Post.objects.get(pk=data["postID"])
 
+        # Add or remove the like
         if like:
-            print("going to like")
             post.likedby.add(user)
         else:
-            print("going to unlike")
             post.likedby.remove(user)
         return HttpResponse(status=204)
 
 
 def profile(request, user_name):
+    """
+    Displays user profile and allows to (un)follow them
+    """
+    # Get the current user object from the DB
     user_id = User.objects.filter(username=user_name).first().id
     # will resolve to 1 if current user follows the profile they are viewing
     follow_flag = Following.objects.filter(
         FollowerID=request.user.id, CreatorID=user_id
     ).count()
 
+    # If current user requested to (un)follow the profile user
     if request.method == "PUT":
         data = json.loads(request.body)
-        print("Pressed the following button")
-        print(f"The data is: {data}")
-        print(f"The user to follow is: {user_name}")
-        print(f"The user following is: {request.user.id}")
+        # If follow request and current user does not follow the profile already
         if data["follow"] and not follow_flag:
-            print("going to follow")
+            # Add a new follower and save to DB
             new_follower = Following()
             new_follower.CreatorID = User.objects.get(id=user_id)
             new_follower.FollowerID = User.objects.get(id=request.user.id)
             new_follower.save()
+        # If unfollow request and user does follow the profile
         elif not data["follow"] and follow_flag:
-            print("going to unfollow")
+            # Get the follower and delete from the DB
             follower = Following.objects.filter(
                 FollowerID=request.user.id, CreatorID=user_id
             )
             follower.delete()
-
+        # if request and follow flag gets out of syns - do nothing
         else:
             print("This should not be possible, need to debug")
 
         return HttpResponse(status=204)
 
+    # If current user opened Profile page
     else:
+        # Get number of following/followers
         followers = Following.objects.filter(CreatorID=user_id).count()
         following = Following.objects.filter(FollowerID=user_id).count()
+        # Get profile user's posts in descending order
         users_posts = Post.objects.filter(UserID=user_id).order_by("-id")
+        # Create a paginator
         p = Paginator(users_posts, 10)
+        # By default return first page, or another is user asked for another
         page = 1
         if request.GET.get("page"):
             page = request.GET.get("page")
 
+        # Pass Follow/Unfollow button text
         button_text = "Follow"
         if request.user.id and follow_flag:
             button_text = "Unfollow"
 
+        # Return data to display on Profile page
         return render(
             request,
             "network/index.html",
@@ -135,26 +176,6 @@ def profile(request, user_name):
                 "button": button_text,
             },
         )
-
-
-def post(request):
-    if request.method == "POST":
-        new_post = Post()
-        new_post.UserID = User.objects.get(id=request.user.id)
-        new_post.message = request.POST.get("post-message")
-        new_post.save()
-
-    all_posts = Post.objects.all().order_by("-id")
-    p = Paginator(all_posts, 10)
-    page = 1
-    if request.GET.get("page"):
-        page = request.GET.get("page")
-
-    return render(
-        request,
-        "network/index.html",
-        {"newpost": True, "profile": False, "posts": p.page(page)},
-    )
 
 
 # --------------------------------------------------------------------------------------------------------------
