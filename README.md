@@ -49,7 +49,7 @@ For this problem a twitter-like social networking site needs to be developed whe
 + [Video submission](https://youtu.be/a8wbNPhpiZk)
 + [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/4_network)
 
-+ ## Final Project - Statistics101
+## Final Project - Statistics101
 
 For the final project an educational website was developed, that explains basic concepts of statistics. The final project combines all concepts and technologies covered in the course and expands on the set of libaries used.
 
