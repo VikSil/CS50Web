@@ -48,3 +48,13 @@ For this problem a twitter-like social networking site needs to be developed whe
 + [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/4/network/)
 + [Video submission](https://youtu.be/a8wbNPhpiZk)
 + [Code](https://github.com/VikSil/CS50Web/tree/trunk/problem_sets/4_network)
+
++ ## Final Project - Statistics101
+
+For the final project an educational website was developed, that explains basic concepts of statistics. The final project combines all concepts and technologies covered in the course and expands on the set of libaries used.
+
++ Technologies: Django, SQLite, Python (pandas, numpy, plotly), HTML, CSS (Sass), Bootstrap, JavaScript (MathJax, Dropzone)
++ [Full requirement specification](https://cs50.harvard.edu/web/2020/projects/final/capstone/)
++ [Video submission](https://youtu.be/sdl8YkIIXxA)
++ [Code](https://github.com/VikSil/Statistics101)
++ [Website](https://viksil.pythonanywhere.com/statistics101)
