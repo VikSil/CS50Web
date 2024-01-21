@@ -1,6 +1,6 @@
 # CS50 WEB PROGRAMMING WITH PYTHON AND JAVASCRIPT
 
->This repository contains all submissions to Harvard's open course ["CS50 Web Programming with Python and JavaScript"](https://cs50.harvard.edu/web/2020/). This document lists all problem sets submitted as part of the course. All video submissions can be found [here](https://youtube.com/playlist?list=PLWOGMQeCra7LaScibYFzl59-Qu6ClBA5y&feature=shared)
+>This repository contains all submissions to Harvard's open course ["CS50 Web Programming with Python and JavaScript"](https://cs50.harvard.edu/web/2020/). This document lists all problem sets submitted as part of the course. The Final Project is stored in a separate repo [here](https://github.com/VikSil/Statistics101). All video submissions can be found [here](https://youtube.com/playlist?list=PLWOGMQeCra7LaScibYFzl59-Qu6ClBA5y&feature=shared)
 
 ## Problem Set 0 - Search
 
