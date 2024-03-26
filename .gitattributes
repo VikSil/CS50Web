@@ -1,1 +1,5 @@
 problem_sets/2_commerce/node_modules/* linguist-vendored
+problem_sets/3_mail/mail/static/mail/* linguist-vendored
+problem_sets/4_network/network/static/network/* linguist-vendored
+problem_sets/2_commerce/auctions/static/auctions/* linguist-vendored
+problem_sets/1_CS50_wiki/encyclopedia/static/encyclopedia/* linguist-vendored
