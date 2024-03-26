@@ -4,7 +4,7 @@
 
 ## Problem Set 0 - Search
 
-For this problem set a replica of Google's front-end needs to be developed. This includes main search, image search and advanced search. Search requests are sent to the actual Google via form action. 
+For this problem set a replica of Google's front-end needs to be developed. This includes main search, image search and the advanced search. Search requests are sent to the actual Google via form action. 
 
 + Technologies: HTML, CSS
 + [Requirements](https://cs50.harvard.edu/web/2020/projects/0/search/)
